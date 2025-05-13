@@ -1,11 +1,11 @@
-# 📘 SystemVerilog for Design and Verification
+# SystemVerilog for Design and Verification
 
 Welcome to the **SystemVerilog for Design and Verification** labs repository!  
 This collection of hands-on labs aims to help students, engineers, and enthusiasts practice and master SystemVerilog for both **design modeling** and **functional verification**.
 
 ---
 
-## 📚 Overview
+## Overview
 
 This repository includes a total of 23 labs, progressing from simple designs to advanced verification techniques using:
 
@@ -21,7 +21,7 @@ Each lab is structured with design files, testbenches, and simulation commands t
 
 ---
 
-## 📁 Labs Index
+## Labs Index
 
 | Lab | Title | Description |
 |-----|-------|-------------|
@@ -51,7 +51,7 @@ Each lab is structured with design files, testbenches, and simulation commands t
 
 ---
 
-## 💾 Requirements
+## Requirements
 
 To run these labs, you will need:
 
@@ -61,7 +61,7 @@ To run these labs, you will need:
 
 ---
 
-## ▶️ Running the Labs
+## Running the Labs
 
 Each lab directory contains:
 - `*.sv` design files
