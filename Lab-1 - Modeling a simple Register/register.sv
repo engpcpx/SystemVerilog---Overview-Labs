@@ -1,6 +1,6 @@
 /*
     Lab 1 - Modeling a Simple Register
-    Specification?
+    Specification:
     - data and out are both 8-bit logic vectors.
     - rst is asynchronous and active low.
     - The register is clocked on the rising edge of clk.
