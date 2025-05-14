@@ -27,13 +27,11 @@ module scale_mux #(logic size = 1) (
     // Logic module
     //----------------------------------
     always_comb () (
-        with sel_a begin
-            case 0:
-                out <= in_a;
-            case 1:
-                out <= in_b;
-            default <= 0;
-        
+        if(sel_a) begin
+            out <= in_a;
+        end
+        else begin
+                out <= in_b;       
         end
     );
 
