@@ -32,8 +32,8 @@ module register_test();
     logic [7:0] out;
 
     // Instantiate the register
-    -----------------------------------------
-    simple_register uut (
+    //-----------------------------------------
+    register u_register (
         .clk(clk),
         .rst_n(rst_n),
         .enable(enable),
@@ -42,17 +42,17 @@ module register_test();
     );
 
     // Clock generation (20ns period)
-    -----------------------------------------
+    //----------------------------------------
     initial begin
         clk = 0;
         forever #10 clk = ~clk;
     end
 
     // Test sequence
-    -----------------------------------------
+    //-----------------------------------------
     initial begin
         // Initialize signals
-        -----------------------------------------
+        //-----------------------------------------
         rst_n  = 1;
         enable = 'x;
         data   = 'x;
@@ -60,56 +60,56 @@ module register_test();
                 $time, enable, rst_n, data, out);
 
         // Test 1
-        -----------------------------------------
+        //-----------------------------------------
         #15; rst_n = 0;  
         $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
                 $time, enable, rst_n, data, out);
         
-         // Test 2
-        -----------------------------------------
+        // Test 2
+        //-----------------------------------------
         #10; rst_n = 1; enable = 0; 
         $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
                 $time, enable, rst_n, data, out);
         
         // Test 3
-        -----------------------------------------
+        //-----------------------------------------
         #10; enable = 1; data = 8'hAA;  
         $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
                 $time, enable, rst_n, data, out);
 
         // Test 4
-        -----------------------------------------
+        //-----------------------------------------
         #10; enable = 0; data = 8'h55;  
         $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
                 $time, enable, rst_n, data, out);
 
-         // Test 5
-        -----------------------------------------
+        // Test 5
+        //-----------------------------------------
         #10; rst_n = 0; enable = 'x; data = 'x; 
         $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
                 $time, enable, rst_n, data, out);
 
-        // Test 7
-        -----------------------------------------
-        #10; rst_n = 1; enable = 0;  // Test 6
+        // Test 
+        //-----------------------------------------
+        #10; rst_n = 1; enable = 0;  
         $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
                 $time, enable, rst_n, data, out);
 
         // Test 7
-        -----------------------------------------
+        //-----------------------------------------
         #10; enable = 1; data = 8'h55;  
         $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
                 $time, enable, rst_n, data, out);
 
         // Test 8
-        -----------------------------------------
+        //-----------------------------------------
         #10; enable = 0; data = 8'hAA;  
         $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
                 $time, enable, rst_n, data, out);
 
         
         // Final check and copy file if test passes
-        -----------------------------------------
+        //----------------------------------------
         if (out === 8'h55) begin
             $display("REGISTER TEST PASSED");
             $system("cp register.sv ../sv_src/");  // Copy on success

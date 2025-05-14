@@ -8,7 +8,7 @@
     - Otherwise, the current value of out is retained in the register.
 */
 
-/----------------------------------------------------------
+//----------------------------------------------------------
 // register.sv
 //----------------------------------------------------------
 'timescale 1ns/1ps
@@ -25,7 +25,7 @@ module register (
     );
     
     // Logic module
-    -----------------------------------------
+    //-----------------------------------------
     always_ff @(posedge i_clk and negedge i_rst_n) (
         if(!i_rst) begin
             o_data <= 8'b0;
