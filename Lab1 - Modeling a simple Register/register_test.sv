@@ -1,8 +1,8 @@
 /*
 Lab 1 - Modeling a Simple Register Testbech
-Objective:
-        Testing the Register Design to provide a simulate the testbench
-        for register module.
+ObjThere's no need for a clock generator since this is a purely combinational design.ective:
+        Verify the functionality of the "register" design by running a simulation using 
+        the testbench provided in the "register_test.sv" file.
 Test Coverage:
         You should see the following results:
         1 time=0.0 ns i_enable=x i_rst_=1 i_data=xx out=xx
@@ -33,6 +33,7 @@ module register_test();
     logic [7:0] i_data;
     logic [7:0] out;
 
+    //-----------------------------------------
     // Instantiate register
     //-----------------------------------------
     register u_register (
@@ -43,6 +44,7 @@ module register_test();
         .out(out)
     );
 
+    //-----------------------------------------
     // Clock generation (20ns period)
     //----------------------------------------
     initial begin
@@ -50,6 +52,7 @@ module register_test();
         forever #10 i_clk = ~i_clk;
     end
 
+//-----------------------------------------
 // Test sequence
 //-----------------------------------------
 initial begin
@@ -61,6 +64,7 @@ initial begin
     $display("1 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
             $time, i_enable, i_rst_n, i_data, out);
 
+    //-----------------------------------------
     // Test 2 - Reset active
     // time=15.0 ns i_enable=x i_rst_=0 i_data=xx out=00
     //-----------------------------------------------
@@ -69,6 +73,7 @@ initial begin
     $display("2 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
             $time, i_enable, i_rst_n, i_data, out);
     
+    //-----------------------------------------
     // Test 3 - Reset inactive, i_enable=0
     // time=25.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
     //-----------------------------------------------
@@ -78,6 +83,7 @@ initial begin
     $display("3 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
             $time, i_enable, i_rst_n, i_data, out);
     
+    //-----------------------------------------
     // Test 4 - i_enable active, i_data=AA
     // time=35.0 ns i_enable=1 i_rst_=1 i_data=aa out=aa
     //-----------------------------------------------
@@ -87,6 +93,7 @@ initial begin
     $display("4 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
             $time, i_enable, i_rst_n, i_data, out);
 
+    //-----------------------------------------
     // Test 5 - i_enable inactive, i_data changes to 55
     // time=45.0 ns i_enable=0 i_rst_=1 i_data=55 out=aa
     //-----------------------------------------------
@@ -96,6 +103,7 @@ initial begin
     $display("5 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
             $time, i_enable, i_rst_n, i_data, out);
 
+    //-----------------------------------------
     // Test 6 - Reset active, signals undefined
     // time=55.0 ns i_enable=x i_rst_=0 i_data=xx out=00
     //-----------------------------------------------
@@ -106,6 +114,7 @@ initial begin
     $display("6 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
             $time, i_enable, i_rst_n, i_data, out);
 
+    //-----------------------------------------
     // Test 7 - Reset inactive, i_enable=0
     // time=65.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
     //-----------------------------------------------
@@ -115,6 +124,7 @@ initial begin
     $display("7 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
             $time, i_enable, i_rst_n, i_data, out);
 
+    //-----------------------------------------
     // Test 8 - i_enable active, i_data=55
     // time=75.0 ns i_enable=1 i_rst_=1 i_data=55 out=55
     //-----------------------------------------------
@@ -124,6 +134,7 @@ initial begin
     $display("8 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
             $time, i_enable, i_rst_n, i_data, out);
 
+    //-----------------------------------------
     // Test 9 - i_enable inactive, i_data changes to AA
     // time=85.0 ns i_enable=0 i_rst_=1 i_data=aa out=55
     //-----------------------------------------------
@@ -133,7 +144,9 @@ initial begin
     $display("9 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
             $time, i_enable, i_rst_n, i_data, out);
 
+    //-----------------------------------------
     // Final verification
+    //-----------------------------------------
     #10;
     if (out === 8'h55) begin
         $display("REGISTER TEST PASSED");
