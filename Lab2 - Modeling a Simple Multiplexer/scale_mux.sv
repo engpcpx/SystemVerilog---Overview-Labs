@@ -22,7 +22,7 @@ module scale_mux #(logic size = 1) (
     input logic s[1:0] sel_a,   // MUX selection
 
     // Output ports
-    input output [size] out     // MUX output
+    logic output [size] out     // MUX output
 )
 
     // Logic module

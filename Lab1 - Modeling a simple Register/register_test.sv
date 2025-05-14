@@ -3,17 +3,17 @@ Lab 1 - Modeling a Simple Register Testbech
 Objective:
         Testing the Register Design to provide a simulate the testbench
         for register module.
-CovereTest Coverage:
+Test Coverage:
         You should see the following results:
-        time=0.0 ns enable=x rst_=1 data=xx out=xx
-        time=15.0 ns enable=x rst_=0 data=xx out=00
-        time=25.0 ns enable=0 rst_=1 data=xx out=00
-        time=35.0 ns enable=1 rst_=1 data=aa out=aa
-        time=45.0 ns enable=0 rst_=1 data=55 out=aa
-        time=55.0 ns enable=x rst_=0 data=xx out=00
-        time=65.0 ns enable=0 rst_=1 data=xx out=00
-        time=75.0 ns enable=1 rst_=1 data=55 out=55
-        time=85.0 ns enable=0 rst_=1 data=aa out=55
+        1 time=0.0 ns i_enable=x i_rst_=1 i_data=xx out=xx
+        2 time=15.0 ns i_enable=x i_rst_=0 i_data=xx out=00
+        3 time=25.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
+        4 time=35.0 ns i_enable=1 i_rst_=1 i_data=aa out=aa
+        5 time=45.0 ns i_enable=0 i_rst_=1 i_data=55 out=aa
+        6 time=55.0 ns i_enable=x i_rst_=0 i_data=xx out=00
+        7 time=65.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
+        7 time=75.0 ns i_enable=1 i_rst_=1 i_data=55 out=55
+        8 time=85.0 ns i_enable=0 i_rst_=1 i_data=aa out=55
         REGISTER TEST PASSED
 Notes:
         When the test passes, copy the register.sv file into the ../sv_src directory.
@@ -27,103 +27,119 @@ Notes:
 module register_test();
     // Signal declarations
     
-    logic       clk;
-    logic       rst_n;
-    logic       enable;
-    logic [7:0] data;
+    logic       i_clk;
+    logic       i_rst_n;
+    logic       i_enable;
+    logic [7:0] i_data;
     logic [7:0] out;
 
-    // Instantiate the register
+    // Instantiate register
     //-----------------------------------------
     register u_register (
-        .clk(clk),
-        .rst_n(rst_n),
-        .enable(enable),
-        .data(data),
+        .i_clk(i_clk),
+        .i_rst_n(i_rst_n),
+        .i_enable(i_enable),
+        .i_data(i_data),
         .out(out)
     );
 
     // Clock generation (20ns period)
     //----------------------------------------
     initial begin
-        clk = 0;
-        forever #10 clk = ~clk;
+        i_clk = 0;
+        forever #10 i_clk = ~i_clk;
     end
 
-    // Test sequence
-    //-----------------------------------------
-    initial begin
-        // Initialize signals
-        //-----------------------------------------
-        rst_n  = 1;
-        enable = 'x;
-        data   = 'x;
-        $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
-                $time, enable, rst_n, data, out);
+// Test sequence
+//-----------------------------------------
+initial begin
+    // Test 1 - Initial state
+    // time=0.0 ns i_enable=x i_rst_=1 i_data=xx out=xx
+    i_rst_n  = 1;
+    i_enable = 'x;
+    i_data   = 'x;
+    $display("1 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
+            $time, i_enable, i_rst_n, i_data, out);
 
-        // Test 1
-        //-----------------------------------------
-        #15; rst_n = 0;  
-        $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
-                $time, enable, rst_n, data, out);
-        
-        // Test 2
-        //-----------------------------------------
-        #10; rst_n = 1; enable = 0; 
-        $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
-                $time, enable, rst_n, data, out);
-        
-        // Test 3
-        //-----------------------------------------
-        #10; enable = 1; data = 8'hAA;  
-        $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
-                $time, enable, rst_n, data, out);
+    // Test 2 - Reset active
+    // time=15.0 ns i_enable=x i_rst_=0 i_data=xx out=00
+    //-----------------------------------------------
+    #15; 
+    i_rst_n = 0;  
+    $display("2 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
+            $time, i_enable, i_rst_n, i_data, out);
+    
+    // Test 3 - Reset inactive, i_enable=0
+    // time=25.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
+    //-----------------------------------------------
+    #10; 
+    i_rst_n = 1; 
+    i_enable = 0; 
+    $display("3 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
+            $time, i_enable, i_rst_n, i_data, out);
+    
+    // Test 4 - i_enable active, i_data=AA
+    // time=35.0 ns i_enable=1 i_rst_=1 i_data=aa out=aa
+    //-----------------------------------------------
+    #10; 
+    i_enable = 1; 
+    i_data = 8'hAA;  
+    $display("4 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
+            $time, i_enable, i_rst_n, i_data, out);
 
-        // Test 4
-        //-----------------------------------------
-        #10; enable = 0; data = 8'h55;  
-        $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
-                $time, enable, rst_n, data, out);
+    // Test 5 - i_enable inactive, i_data changes to 55
+    // time=45.0 ns i_enable=0 i_rst_=1 i_data=55 out=aa
+    //-----------------------------------------------
+    #10; 
+    i_enable = 0; 
+    i_data = 8'h55;  
+    $display("5 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
+            $time, i_enable, i_rst_n, i_data, out);
 
-        // Test 5
-        //-----------------------------------------
-        #10; rst_n = 0; enable = 'x; data = 'x; 
-        $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
-                $time, enable, rst_n, data, out);
+    // Test 6 - Reset active, signals undefined
+    // time=55.0 ns i_enable=x i_rst_=0 i_data=xx out=00
+    //-----------------------------------------------
+    #10; 
+    i_rst_n = 0; 
+    i_enable = 'x; 
+    i_data = 'x; 
+    $display("6 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
+            $time, i_enable, i_rst_n, i_data, out);
 
-        // Test 
-        //-----------------------------------------
-        #10; rst_n = 1; enable = 0;  
-        $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
-                $time, enable, rst_n, data, out);
+    // Test 7 - Reset inactive, i_enable=0
+    // time=65.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
+    //-----------------------------------------------
+    #10; 
+    i_rst_n = 1; 
+    i_enable = 0;  
+    $display("7 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
+            $time, i_enable, i_rst_n, i_data, out);
 
-        // Test 7
-        //-----------------------------------------
-        #10; enable = 1; data = 8'h55;  
-        $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
-                $time, enable, rst_n, data, out);
+    // Test 8 - i_enable active, i_data=55
+    // time=75.0 ns i_enable=1 i_rst_=1 i_data=55 out=55
+    //-----------------------------------------------
+    #10; 
+    i_enable = 1; 
+    i_data = 8'h55;  
+    $display("8 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
+            $time, i_enable, i_rst_n, i_data, out);
 
-        // Test 8
-        //-----------------------------------------
-        #10; enable = 0; data = 8'hAA;  
-        $display("time=%0.1f ns enable=%b rst_n=%b data=%h out=%h", 
-                $time, enable, rst_n, data, out);
+    // Test 9 - i_enable inactive, i_data changes to AA
+    // time=85.0 ns i_enable=0 i_rst_=1 i_data=aa out=55
+    //-----------------------------------------------
+    #10; 
+    i_enable = 0; 
+    i_data = 8'hAA;  
+    $display("9 time=%0.1f ns i_enable=%b i_rst_n=%b i_data=%h out=%h", 
+            $time, i_enable, i_rst_n, i_data, out);
 
-        
-        // Monitor to display changes
-        initial begin
-                $monitor("Time = %0t: sel_a = %b, in_a = %h, in_b = %h, out = %h", 
-                        $time, sel_a, in_a, in_b, out);
-        end
-
-        // Final check and copy file if test passes
-        //----------------------------------------
-        if (out === 8'h55) begin
-            $display("REGISTER TEST PASSED");
-            $system("cp register.sv ../sv_src/");  // Copy on success
-        end else begin
-            $display("REGISTER TEST FAILED (out=%h, expected 55)", out);
-        end
-        #10 $finish;
+    // Final verification
+    #10;
+    if (out === 8'h55) begin
+        $display("REGISTER TEST PASSED");
+    end else begin
+        $display("REGISTER TEST FAILED (out=%h, expected 55)", out);
     end
+    $finish;
+end
 endmodule
