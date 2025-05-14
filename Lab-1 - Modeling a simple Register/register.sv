@@ -14,7 +14,7 @@
 'timescale 1ns/1ps
 module register (
         // inputs ports
-        -----------------------------------------
+        //-----------------------------------------
         input logic i_clk,            // FPGA clock
         input logic i_enable,         // Enable signal
         input logic i_rst_n,          // Reset signal
