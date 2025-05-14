@@ -1,5 +1,5 @@
 /*
-    Lab 2Modeling a Simple Multiplexor
+    Lab 2 - Modeling a Simple Multiplexer
     Objective:
         To use SystemVerilog procedural constructs to model a simple     multiplexor.
         This is a simple multiplexor design using SystemVerilog constructs and test it
@@ -14,6 +14,7 @@
 //----------------------------------------------------------
 // register.sv
 //----------------------------------------------------------
+`timescale 1ns/1ps
 module scale_mux #(logic size = 1) (
     // Input ports
     input logic [size] in_a,    // MUX input a
@@ -31,7 +32,7 @@ module scale_mux #(logic size = 1) (
             out <= in_a;
         end
         else begin
-                out <= in_b;       
+            out <= in_b;       
         end
     );
 

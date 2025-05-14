@@ -1,21 +1,23 @@
 /*
-    Lab 1 - Modeling a Simple Register Testbech
-    Testing the Register Design
-    A testbench must be provided in the file register_test.sv. Simulate the testbench
-    and register design.
-    You should see the following results:
-    time=0.0 ns enable=x rst_=1 data=xx out=xx
-    time=15.0 ns enable=x rst_=0 data=xx out=00
-    time=25.0 ns enable=0 rst_=1 data=xx out=00
-    time=35.0 ns enable=1 rst_=1 data=aa out=aa
-    time=45.0 ns enable=0 rst_=1 data=55 out=aa
-    time=55.0 ns enable=x rst_=0 data=xx out=00
-    time=65.0 ns enable=0 rst_=1 data=xx out=00
-    time=75.0 ns enable=1 rst_=1 data=55 out=55
-    time=85.0 ns enable=0 rst_=1 data=aa out=55
-    REGISTER TEST PASSED
-   
-    When the test passes, copy the register.sv file into the .
+Lab 1 - Modeling a Simple Register Testbech
+Objective:
+        Testing the Register Design to provide a simulate the testbench
+        for register module.
+CovereTest Coverage:
+        You should see the following results:
+        time=0.0 ns enable=x rst_=1 data=xx out=xx
+        time=15.0 ns enable=x rst_=0 data=xx out=00
+        time=25.0 ns enable=0 rst_=1 data=xx out=00
+        time=35.0 ns enable=1 rst_=1 data=aa out=aa
+        time=45.0 ns enable=0 rst_=1 data=55 out=aa
+        time=55.0 ns enable=x rst_=0 data=xx out=00
+        time=65.0 ns enable=0 rst_=1 data=xx out=00
+        time=75.0 ns enable=1 rst_=1 data=55 out=55
+        time=85.0 ns enable=0 rst_=1 data=aa out=55
+        REGISTER TEST PASSED
+Notes:
+        When the test passes, copy the register.sv file into the ../sv_src directory.
+        You will use it later for the complete VeriRISC design lab.
 */
 
 //----------------------------------------------------------
@@ -108,6 +110,12 @@ module register_test();
                 $time, enable, rst_n, data, out);
 
         
+        // Monitor to display changes
+        initial begin
+                $monitor("Time = %0t: sel_a = %b, in_a = %h, in_b = %h, out = %h", 
+                        $time, sel_a, in_a, in_b, out);
+        end
+
         // Final check and copy file if test passes
         //----------------------------------------
         if (out === 8'h55) begin
