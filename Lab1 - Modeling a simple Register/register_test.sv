@@ -1,23 +1,24 @@
 /*
 Lab 1 - Modeling a Simple Register Testbech
-ObjThere's no need for a clock generator since this is a purely combinational design.ective:
-        Verify the functionality of the "register" design by running a simulation using 
-        the testbench provided in the "register_test.sv" file.
-Test Coverage:
-        You should see the following results:
-        1 time=0.0 ns i_enable=x i_rst_=1 i_data=xx out=xx
-        2 time=15.0 ns i_enable=x i_rst_=0 i_data=xx out=00
-        3 time=25.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
-        4 time=35.0 ns i_enable=1 i_rst_=1 i_data=aa out=aa
-        5 time=45.0 ns i_enable=0 i_rst_=1 i_data=55 out=aa
-        6 time=55.0 ns i_enable=x i_rst_=0 i_data=xx out=00
-        7 time=65.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
-        7 time=75.0 ns i_enable=1 i_rst_=1 i_data=55 out=55
-        8 time=85.0 ns i_enable=0 i_rst_=1 i_data=aa out=55
-        REGISTER TEST PASSED
-Notes:
-        When the test passes, copy the register.sv file into the ../sv_src directory.
-        You will use it later for the complete VeriRISC design lab.
+        Objective: 
+                Verify the functionality of the "register" design by running a simulation using 
+                the testbench provided in the "register_test.sv" file.
+                There's no need for a clock generator since this is a purely combinational design.
+                
+                When the test passes, copy the register.sv file into the ../sv_src directory.
+                You will use it later for the complete VeriRISC design lab.
+        Test Coverage:
+                You should see the following results:
+                1 time=0.0 ns i_enable=x i_rst_=1 i_data=xx out=xx
+                2 time=15.0 ns i_enable=x i_rst_=0 i_data=xx out=00
+                3 time=25.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
+                4 time=35.0 ns i_enable=1 i_rst_=1 i_data=aa out=aa
+                5 time=45.0 ns i_enable=0 i_rst_=1 i_data=55 out=aa
+                6 time=55.0 ns i_enable=x i_rst_=0 i_data=xx out=00
+                7 time=65.0 ns i_enable=0 i_rst_=1 i_data=xx out=00
+                7 time=75.0 ns i_enable=1 i_rst_=1 i_data=55 out=55
+                8 time=85.0 ns i_enable=0 i_rst_=1 i_data=aa out=55
+                REGISTER TEST PASSED              
 */
 
 //----------------------------------------------------------

@@ -1,11 +1,13 @@
 /*
     Lab 1 - Modeling a Simple Register
+    Objetive:
+        To use SystemVerilog procedural constructs to model a simple register.
     Specification:
-    - data and out are both 8-bit logic vectors.
-    - rst is asynchronous and active low.
-    - The register is clocked on the rising edge of clk.
-    - If enable is high, the input data is passed to the output out.
-    - Otherwise, the current value of out is retained in the register.
+        - data and out are both 8-bit logic vectors.
+        - rst is asynchronous and active low.
+        - The register is clocked on the rising edge of clk.
+        - If enable is high, the input data is passed to the output out.
+        - Otherwise, the current value of out is retained in the register.
 */
 
 //----------------------------------------------------------
