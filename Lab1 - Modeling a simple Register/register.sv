@@ -1,4 +1,4 @@
-/*
+/**
     Lab 1 - Modeling a Simple Register
     Objetive:
         To use SystemVerilog procedural constructs to model a simple register.
@@ -8,7 +8,24 @@
         - The register is clocked on the rising edge of clk.
         - If enable is high, the input data is passed to the output out.
         - Otherwise, the current value of out is retained in the register.
-*/
+**/
+
+/**
+Functional Diagram
+
+                  +-----------------------+
+                  |                       |
+                  |       REGISTER        |
+                  |                       |
+   i_clk -------->|                       |
+   i_rst_n ------>|                       |
+   i_enable ----->|                       |
+   i_data[7:0] -->|                       |
+                  |                       |
+                  |                       |--->  o_out[7:0]
+                  +-----------------------+
+
+**/
 
 //----------------------------------------------------------
 // register.sv
